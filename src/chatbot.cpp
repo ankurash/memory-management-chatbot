@@ -46,61 +46,71 @@ ChatBot::~ChatBot()
 ////
 ChatBot::ChatBot(const ChatBot &source)
 {
-    // data handles (owned)
-    _image = new wxBitmap(*source._image); // avatar image
-
+    std::cout<<"ChatBot Copy Constructor."<<std::endl;
+    
     // data handles (not owned)
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
-    _chatLogic->SetChatbotHandle(this);
-    std::cout<<"ChatBot Copy Constructor.\n";
+    //_chatLogic->SetChatbotHandle(this);
+    // data handles (owned)
+    if(source._image == NULL)
+        _image = NULL;
+    else
+        _image = new wxBitmap(*source._image); // avatar image
 }
 
 ChatBot::ChatBot(ChatBot &&source)
 {
+    std::cout<<"ChatBot Move Constructor."<<std::endl;
     // data handles (owned)
-    _image = source._image;
+    
 
     // data handles (not owned)
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
+    _image = source._image;
     _chatLogic->SetChatbotHandle(this);
-    source._image =  NULL; // source._currentNode = nullptr; source._rootNode = nullptr; source._chatLogic = nullptr;
-    std::cout<<"ChatBot Move Constructor.\n";
+    source._image =  NULL;  source._currentNode = nullptr; source._rootNode = nullptr; source._chatLogic = nullptr;
+    
 }
 
 ChatBot& ChatBot::operator=(const ChatBot &source)
 {
+    std::cout<<"ChatBot Copy Assignment Operator."<<std::endl;
     if (this == &source)
         return *this;
-    // data handles (owned)
-    _image = new wxBitmap(*source._image); // avatar image
-
+    
     // data handles (not owned)
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
-    _chatLogic->SetChatbotHandle(this);
-    std::cout<<"ChatBot Copy Assignment Operator.\n";
+    //_chatLogic->SetChatbotHandle(this);
+    // data handles (owned)
+    if(source._image == NULL)
+        _image = NULL;
+    else
+        _image = new wxBitmap(*source._image); // avatar image
     return *this;
 }
 
 ChatBot& ChatBot::operator=(ChatBot &&source)
 {
+    std::cout<<"ChatBot Move Assignment Operator."<<std::endl;
     if (this == &source)
         return *this;
-    // data handles (owned)
-    _image = source._image;
-
+    
     // data handles (not owned)
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
     _chatLogic->SetChatbotHandle(this);
-    source._image = NULL; //source._currentNode = nullptr; source._rootNode = nullptr; source._chatLogic = nullptr;
-    std::cout<<"ChatBot Move Assignment Operator.\n";
+    // data handles (owned)
+    _image = source._image;
+
+    source._image = NULL; source._currentNode = nullptr; source._rootNode = nullptr; source._chatLogic = nullptr;
+    
     return *this;
 }
 ////

@@ -30,10 +30,10 @@ public:
     //// STUDENT CODE
     ////
     ////TASK 2
-    ChatBot(const ChatBot &source);
-    ChatBot(ChatBot &&source);
-    ChatBot &operator=(const ChatBot &source);
-    ChatBot &operator=(ChatBot &&source);
+    ChatBot(const ChatBot &source); //copy
+    ChatBot(ChatBot &&source);      //move
+    ChatBot &operator=(const ChatBot &source);  //copy assignment
+    ChatBot &operator=(ChatBot &&source);       //move assignment
 
     ////
     //// EOF STUDENT CODE
